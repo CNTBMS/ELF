@@ -2,9 +2,9 @@
 <h1>Emergency pronosis models using Federated Learning Platform</h1>
 
 ## Contents
-1. [Introduction](#1.-Introduction)
-2. [Environment](#2.-Environment)
-3. [APIs](#3.-APIs)
+1. [Introduction](#1-introduction)
+2. [Environment](#2-environment)
+3. [APIs](#3-apis)
 ---
 ## 1. Introduction
 
@@ -29,13 +29,13 @@ It is operated in google cloud platform(GCP) with Google cloud services(GCS, Big
  ![1](https://github.com/CNTBMS/ELF/assets/69572216/9749d276-32a0-40c8-9b8c-2bcc18116286)
 
   
-* TensorFlow-based development virtualization  environment using Docker
-* Deploying a development environment server for federated learning on a cloud computing instance
-* As a model parameter storage, it is composed of independent storage considering security and stability
-* DW service for loading learning round metadata and logs of federated learning
-* Update federated learning model parameters or load metadata
-* The medical data storage is not accessed from the outside, but only when training the local model on the development server of the participating institution.
-* Print out monitoring indicator
+1) TensorFlow-based development virtualization  environment using Docker
+2) Deploying a development environment server for federated learning on a cloud computing instance
+3) As a model parameter storage, it is composed of independent storage considering security and stability
+4) DW service for loading learning round metadata and logs of federated learning
+5) Update federated learning model parameters or load metadata
+6) The medical data storage is not accessed from the outside, but only when training the local model on the development server of the participating institution.
+7) Print out monitoring indicator
 
 ---
 ## 3. APIs
