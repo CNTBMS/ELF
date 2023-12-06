@@ -40,9 +40,18 @@ It is operated in google cloud platform(GCP) with Google cloud services(GCS, Big
 ---
 ## 3. APIs
 
-* 1
-* 2
-* 3
+※ Descripted common platform APIs without substantiation usage  
+
+|Function|Request URL|Method|
+|---|---|---|
+|Login|/login|POST|
+|Logout|/logout|GET|
+|Check session|/session|GET|
+|Check institution status|/readystat|GET|
+|Upload|/upload|POST|
+|Get moedels list|/files|GET|
+|Download|/files/{Institution}/{Algorithm}/{model_variation}/{fl_round}/{file_name}|GET|
+|Averaging|/averaging|GET|
 
 ---
 
