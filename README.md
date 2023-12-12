@@ -5,6 +5,7 @@
 1. [Introduction](#1-introduction)
 2. [Environment](#2-environment)
 3. [APIs](#3-apis)
+4. [Experiments](#4-experiments)
 ---
 ## 1. Introduction
 
@@ -54,5 +55,8 @@ It is operated in google cloud platform(GCP) with Google cloud services(GCS, Big
 |Averaging|/averaging|GET|
 
 ---
+## 4. Experiments
+
+With TF model and data of two institutions(Samsung medical center, Korea university medical center), ELF FL got following result tables.   
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0c2238&height=120&section=footer&text=ELF&fontSize=100&fontColor=d6ace6" />
