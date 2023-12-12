@@ -57,6 +57,9 @@ It is operated in google cloud platform(GCP) with Google cloud services(GCS, Big
 ---
 ## 4. Experiments
 
-With TF model and data of two institutions(Samsung medical center, Korea university medical center), ELF FL got following result tables.   
+* With TF model and data of two institutions(Samsung medical center, Korea university medical center), We could get some results after progressing FL.
+* FL doesn't always prove your model performance more better than local-learning model. But if you don't have enough data to ML, you could try FL with people or institutions in same purpose. It may improve your model performance
+
+
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0c2238&height=120&section=footer&text=ELF&fontSize=100&fontColor=d6ace6" />
