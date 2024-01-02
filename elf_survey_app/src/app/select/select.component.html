@@ -1,0 +1,52 @@
+<div class="App_Login_Container">
+  <div class="App_Login_Content">
+    <div class="Content_Box">
+      <div class="Content_Header">
+        <div class="Content_Logo_Box">
+          <img src="../../assets/img/ELF-최종안-가로.png" alt="" />
+        </div>
+        <form action="http://192.168.2.8:8080/logout" routerLink="/">
+          <input type="submit" value="로그아웃" class="Logout_Btn">
+        </form>
+      </div>
+
+      <div class="Algo_Select_Area_Box">
+        <p class="Guide_Msg">
+          <span>참여하실 알고리즘을 선택해 주세요.</span>
+        </p>
+
+
+        <p class="Algo_Btn">
+          <button mat-button routerLink="/SMC"
+          (click)="Call_SMC_Algo_Handler()"
+          >
+
+                응급실 중증 환자 처방 추천 <br>
+                (삼성서울병원)
+
+          </button>
+        </p>
+        <p class="Algo_Btn">
+          <button mat-button routerLink="/KUMC"
+          (click)="Call_KUMC_Algo_Handler()"
+          >
+
+          응급실 심혈관 시술 및 수술 예측 <br>
+          (고려대학교 안암 병원)
+
+          </button>
+        </p>
+      </div>
+      <div class="Contact_Box">
+        <span>
+          (주)씨앤텍시스템즈 TEL.02-734-2889 <br> EMAIL. sh.hwang&#64;cntechsystems.com
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- <mat-progress-bar class="Progress_Bar" mode="determinate"  value="20" [value]="Progress_Step"></mat-progress-bar> -->
+</div>
+
