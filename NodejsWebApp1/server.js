@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'angular/dist/elf_demo'))); //FL
-//app.use(express.static(path.join(__dirname, 'react/build'))); // substantiation only
+app.use(express.static(path.join(__dirname, 'react/build'))); // substantiation only
 
 initRoutes(app);
 let port = {PORT}; //write server port

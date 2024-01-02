@@ -25,9 +25,9 @@ let routes = (app) => {
   res.sendFile(path.join(__dirname, '../angular/dist/elf_demo/index.html'));
 });
 
-  /*router.get('*', function (req, res) {
+  router.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../react/build/index.html'));
-}); */ // substantiation
+});  // substantiation
 
   app.use(router);
 };
