@@ -1,0 +1,196 @@
+<div class="Dialog_Container">
+  <mat-dialog-content mat-dialog-content class="Result_Content">
+    <div *ngIf="data.IsThisMonitoirng !== 'YES'" class="Result_Mark">
+      <img src="../../assets/icon/line-md_confirm-circle.svg" alt="" />
+    </div>
+    <div class="Selected_Result"  *ngIf="data.selected == 'smc-algo' &&data.IsThisMonitoirng !== 'YES' ">
+      <strong>[내원 당시 데이터]를 활용한 응급실 중증 환자 처방 추천</strong>
+    </div>
+    <div *ngIf="data.IsThisMonitoirng === 'YES'" class="Selected_Result">
+      <strong>성능지표 (SMC)</strong>
+    </div>
+    <div style="width: 100%; padding-left: 16px" *ngIf="data.selected == 'smc-algo' && data.IsThisMonitoirng !== 'YES'">
+      <div class="Result_Section">
+        ▪ 응급실에서 호흡 보조&nbsp;
+        <strong> (고유량 산소, 기관내 삽관) </strong>가 &nbsp;
+        <strong class="Result_Predict" *ngIf="data.predict1"
+          >{{data.predict1}}</strong
+        >
+      </div>
+      <div class="Result_Section">
+        ▪ 응급실에서 순환 보조&nbsp;
+        <strong> (중심정맥관 삽입, 승압제 사용) </strong>이 &nbsp;
+        <strong class="Result_Predict" *ngIf="data.predict2"
+          >{{data.predict2}}</strong
+        >
+      </div>
+      <div class="Result_Section">
+        ▪ 응급실 심폐소생술 또는 중환자실 입원 또는 사망&nbsp;
+        <strong>위험</strong>이 &nbsp;
+        <strong class="Result_Predict" *ngIf="data.predict3"
+          >{{data.predict3}}</strong
+        >
+      </div>
+    </div>
+
+    <div
+      class="Selected_Result"
+      style="margin-top: 32px"
+      *ngIf="data.selected == 'smc-algo-3h' && data.IsThisMonitoirng !== 'YES'"
+    >
+      <strong>[3시간 후 피검사 값]이 계산된 응급실 중증 환자 처방 추천</strong>
+    </div>
+    <div
+      *ngIf="data.selected == 'smc-algo-3h' && data.IsThisMonitoirng !== 'YES'"
+      style="width: 100%; padding-left: 16px"
+    >
+      <div class="Result_Section">
+        ▪ 응급실에서 호흡 보조&nbsp;
+        <strong> (고유량 산소, 기관내 삽관) </strong>가 &nbsp;
+        <strong class="Result_Predict" *ngIf="data.predict1"
+          >{{data.predict1}}</strong
+        >
+      </div>
+      <div class="Result_Section">
+        ▪ 응급실에서 순환 보조&nbsp;
+        <strong> (중심정맥관 삽입, 승압제 사용) </strong>이 &nbsp;
+
+        <strong class="Result_Predict" *ngIf="data.predict2"
+          >{{data.predict2}}</strong
+        >
+      </div>
+      <div class="Result_Section">
+        ▪ 응급실 심폐소생술 또는 중환자실 입원 또는 사망&nbsp;
+        <strong>위험</strong>이 &nbsp;
+        <strong class="Result_Predict" *ngIf="data.predict3"
+          >{{data.predict3}}</strong
+        >
+      </div>
+    </div>
+    <div *ngIf="data.IsThisMonitoirng === 'YES'">
+       <!-- 내원 당시 -->
+       <table mat-table [dataSource]="dataSource">
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">{{element.model}}</td>
+        </ng-container>
+
+        <!-- Accuracy Column -->
+        <ng-container matColumnDef="Accuracy">
+          <th mat-header-cell *matHeaderCellDef>Accuracy</th>
+          <td mat-cell *matCellDef="let element">{{element.Accuracy}}</td>
+        </ng-container>
+
+        <!-- Precision Column -->
+        <ng-container matColumnDef="Precision">
+          <th mat-header-cell *matHeaderCellDef>Precision</th>
+          <td mat-cell *matCellDef="let element">{{element.Precision}}</td>
+        </ng-container>
+
+        <!-- Recall Column -->
+        <ng-container matColumnDef="Recall">
+          <th mat-header-cell *matHeaderCellDef>Recall</th>
+          <td mat-cell *matCellDef="let element">{{element.Recall}}</td>
+        </ng-container>
+
+        <!-- AUPRC Column -->
+        <ng-container matColumnDef="AUPRC">
+          <th mat-header-cell *matHeaderCellDef>AUPRC</th>
+          <td mat-cell *matCellDef="let element">{{element.AUPRC}}</td>
+        </ng-container>
+        <!-- AUROC Column -->
+        <ng-container matColumnDef="AUROC">
+          <th mat-header-cell *matHeaderCellDef>AUROC</th>
+          <td mat-cell *matCellDef="let element">{{element.AUROC}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="header_row_for_title">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.colspan]="6"
+            style="text-align: center"
+          >
+            내원당시
+          </th>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['header_row_for_title']"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <table mat-table [dataSource]="dataSource_3h">
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="model">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">{{element.model}}</td>
+        </ng-container>
+
+        <!-- Accuracy Column -->
+        <ng-container matColumnDef="Accuracy">
+          <th mat-header-cell *matHeaderCellDef>Accuracy</th>
+          <td mat-cell *matCellDef="let element">{{element.Accuracy}}</td>
+        </ng-container>
+
+        <!-- Precision Column -->
+        <ng-container matColumnDef="Precision">
+          <th mat-header-cell *matHeaderCellDef>Precision</th>
+          <td mat-cell *matCellDef="let element">{{element.Precision}}</td>
+        </ng-container>
+
+        <!-- Recall Column -->
+        <ng-container matColumnDef="Recall">
+          <th mat-header-cell *matHeaderCellDef>Recall</th>
+          <td mat-cell *matCellDef="let element">{{element.Recall}}</td>
+        </ng-container>
+
+        <!-- AUPRC Column -->
+        <ng-container matColumnDef="AUPRC">
+          <th mat-header-cell *matHeaderCellDef>AUPRC</th>
+          <td mat-cell *matCellDef="let element">{{element.AUPRC}}</td>
+        </ng-container>
+        <!-- AUROC Column -->
+        <ng-container matColumnDef="AUROC">
+          <th mat-header-cell *matHeaderCellDef>AUROC</th>
+          <td mat-cell *matCellDef="let element">{{element.AUROC}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="header_row_for_title">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.colspan]="6"
+            style="text-align: center"
+          >
+            3시간 후
+          </th>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['header_row_for_title']"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+
+    <mat-dialog-actions>
+      <button
+        mat-button
+        class="Close_Btn Recommend_Additional_Running_Btn"
+        (click)="Dialog_Close_Handler()"
+        *ngIf="data.selected == 'smc-algo'"
+      >
+        [3시간 후 피검사 값]에 의한 결과를 확인해 보세요.
+      </button>
+      <button mat-button class="Close_Btn" (click)="Dialog_Close_Handler()">
+        확인
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>

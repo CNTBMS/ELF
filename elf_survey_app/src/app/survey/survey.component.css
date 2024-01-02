@@ -1,0 +1,269 @@
+.App_Survey_Container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Valid_Area {
+  min-width: 900px;
+  height: 100%;
+}
+.Survey_Header {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 3px 5px #ededed;
+}
+
+.ELF_Logo_Box {
+  width: 100px;
+  height: 100%;
+
+  transform: translateY(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+}
+.ELF_Logo_Box img {
+  width: 100%;
+}
+.Header_Information {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+}
+
+.Survey_Header .Valid_Area::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+  opacity: 0.8;
+}
+.Survey_Header > * {
+  z-index: 9999;
+}
+.Survey_Header .Valid_Area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Survey_Header .Valid_Area .KUMC_Algo_Title {
+  font-family: "SUIT", "Nanum Gothic Coding", sans-serif !important;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #4d71a5;
+  margin-right: 16px;
+}
+.Survey_Header .Valid_Area .Algo_Header_Btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Survey_Header .Valid_Area .Algo_Header_Btns .Logout_Btn {
+  width: 80px;
+  height: 28px;
+  margin-right: 10px;
+  text-decoration: underline;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+.Survey_Header .Valid_Area .Algo_Header_Btns .Back_Btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #4d71a5;
+}
+.Survey_Header .Valid_Area .Algo_Header_Btns .Back_Btn:hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.Survey_Section {
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  background: white;
+}
+.Section_Box {
+  padding: 30px;
+  border: 3px solid white;
+  margin: 16px;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+
+.Section_Box.Focused {
+  border: 3px solid #eb5c6261;
+}
+
+.Section_Box.Initial_Lab.Focused,
+.Section_Box.Recent_Lab.Focused {
+  border: 3px solid #cd474a;
+}
+
+.Section_Box.Initial_Lab.Blocked,
+.Section_Box.Recent_Lab.Blocked {
+  position: relative;
+}
+.Section_Box.Initial_Lab.Blocked::after,
+.Section_Box.Recent_Lab.Blocked::after {
+  content: "* [3시간 후 피검사], [최근 1년 이내 진단이력] 중 하나만 입력해 주세요.";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 100%;
+  height: 50px;
+  opacity: 0.9;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #cd474a;
+}
+
+.Section_Box:last-child {
+  padding: 50px 30px;
+  border-bottom: none;
+}
+.Section_Box:last-child .Result_Btn {
+  width: 100%;
+  height: 42px;
+  background: white;
+  border: 2px solid #507be9;
+  color: #507be9;
+  border-radius: 2px;
+}
+.Section_Box:last-child .Result_Btn:hover {
+  color: white;
+  border: 2px solid white;
+  background: #507be9;
+  transition: all 0.2s ease-in-out;
+}
+.Section_Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #aebde4;
+  height: 50px;
+}
+.Section_Header .Section_Title {
+  color: #050f32;
+  font-weight: 700;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
+}
+.Section_Header .Arrange_Title {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #6f89ad;
+  letter-spacing: -1px;
+}
+
+.Section_Row {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Section_Item_Box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
+  margin-top: 50px;
+  justify-content: space-evenly;
+}
+.Section_Item_Box:nth-child(odd) {
+  line-height: 30px;
+  width: 70%;
+}
+.Section_Item_Box:nth-child(even) {
+  width: 30%;
+}
+
+.Section_Item_Box .Section_Item_Label {
+  width: 100%;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #4d71a5;
+}
+
+.Section_Item_Box .Section_Item_Label .Label_Unit {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.Section_Item_Box mat-form-field {
+  width: calc(100% - 100px);
+  height: 28px;
+  background: #f4f4f4;
+  line-height: 28px;
+  box-shadow: inset -1px 1px 2px #b3b3b3;
+}
+
+.Survey_Footer {
+  background-color: #a69c9c;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Survey_Footer > .Valid_Area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,997 @@
+<div class="App_SMC_Algo_Container">
+  <mat-toolbar class="SMC_Algo_Header">
+    <div class="Valid_Area" style="min-width: 1000px">
+      <div class="ELF_Logo_Box" routerLink="/select">
+        <img src="../../assets/img/ELF-최종안-가로.png" alt="" />
+      </div>
+      <div class="Header_Information">
+        <span class="SMC_Algo_Title">응급실 중증 환자 처방 추천 (SMC)</span>
+        <div class="Algo_Header_Btns">
+          <form action="http://192.168.2.8:8080/logout" routerLink="/">
+            <input type="submit" value="로그아웃" class="Logout_Btn" />
+          </form>
+          <button
+            mat-icon-button
+            class="Back_Btn"
+            aria-label="Example icon-button with heart icon"
+            (click)="backClicked()"
+          >
+            <span class="material-icons-outlined"> arrow_back </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="SMC_Algo_Section">
+    <div class="Valid_Area">
+      <div class="Section_Box Default_Value">
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <!-- 빈 박스 -->
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> CASE 선택</label>
+              <mat-form-field>
+                <mat-select
+                  name="sample_case"
+                  [formControl]="sample_case"
+                  placeholder="CASE 선택"
+                  [(ngModel)]="case_selected"
+                  (selectionChange)="Case_Select_Handler($event.value)"
+                >
+                  <mat-option value="1">CASE 1</mat-option>
+                  <mat-option value="2">CASE 2</mat-option>
+                  <mat-option value="3">CASE 3</mat-option>
+                  <mat-option value="4">CASE 4</mat-option>
+                  <mat-option value="5">CASE 5</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Section_Box Chief_Complaint">
+        <div class="Section_Header">
+          <span class="Section_Title"> 1 &#41; 내원 당시 정보</span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Age</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+
+                  name="age"
+
+                  max="130"
+                  [formControl]="age"
+                  matInput
+                  placeholder="Age"
+                  [(ngModel)]="age_case"
+                  required
+                />
+                <label class="Label_Unit" for="">세</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Sex</label>
+              <mat-radio-group
+                name="sex"
+                [(ngModel)]="sex_selected"
+                required
+                [formControl]="sex"
+              >
+                <mat-radio-button class="" value="1">Male</mat-radio-button>
+                <mat-radio-button class="" value="0">Female</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="sex.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box Select_Form">
+              <label class="Section_Item_Label">주 증상명</label>
+              <mat-form-field>
+                <mat-select
+                  name="cc_text"
+                  [formControl]="cc_text"
+                  [(ngModel)]="cctext_selected"
+                  required
+                  placeholder="주 증상명"
+                >
+                  <mat-option value="1">Abdominal pain</mat-option>
+                  <mat-option value="2">Fever</mat-option>
+                  <mat-option value="3">Dyspnea</mat-option>
+                  <mat-option value="4">Dizziness</mat-option>
+                  <mat-option value="5">Headache</mat-option>
+                  <mat-option value="6">Chest pain</mat-option>
+                  <mat-option value="7">General weakness</mat-option>
+                  <mat-option value="8">Altered mentality</mat-option>
+                  <mat-option value="9">Chest discomfort</mat-option>
+                  <mat-option value="10">Hematuria</mat-option>
+                  <mat-option value="11">Back pain</mat-option>
+                  <mat-option value="12">Skin rash, urticaria</mat-option>
+                  <mat-option value="13">Palpitation</mat-option>
+                  <mat-option value="14">Hematochezia</mat-option>
+                  <mat-option value="15">Syncope</mat-option>
+                  <mat-option value="16">Melena</mat-option>
+                  <mat-option value="17">Vomiting</mat-option>
+                  <mat-option value="18">Dysuria</mat-option>
+                  <mat-option value="19">Flank pain</mat-option>
+                  <mat-option value="20">Sz</mat-option>
+                  <mat-option value="21">Hematemesis</mat-option>
+                  <mat-option value="23">Coughing</mat-option>
+                  <mat-option value="41">etc</mat-option>
+                </mat-select>
+                <mat-error class="Select_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">내원방법</label>
+              <mat-form-field>
+                <mat-select
+                  name="arrivtype"
+                  [formControl]="arrivtype"
+                  required
+                  placeholder="내원 방법"
+                  [(ngModel)]="arrivetype_selected"
+                >
+                  <mat-option value="1">119 구급차</mat-option>
+                  <mat-option value="2">의료기관구급차</mat-option>
+                  <mat-option value="3">기타 구급차</mat-option>
+                  <mat-option value="4">경찰차 등 공공차량</mat-option>
+                  <mat-option value="5">항공 이송</mat-option>
+                  <mat-option value="6">기타 자동차</mat-option>
+                  <mat-option value="7">도보</mat-option>
+                  <mat-option value="8">기타</mat-option>
+                  <mat-option value="9">미상</mat-option>
+                </mat-select>
+                <mat-error class="Select_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">KTAS</label>
+              <mat-form-field>
+                <mat-select
+                  name="KTAS"
+                  [formControl]="KTAS"
+                  placeholder="KTAS"
+                  [(ngModel)]="KTAS_selected"
+                  required
+                >
+                  <mat-option value="1">KTAS 1</mat-option>
+                  <mat-option value="2">KTAS 2</mat-option>
+                  <mat-option value="3">KTAS 3</mat-option>
+                  <mat-option value="4">KTAS 4</mat-option>
+                  <mat-option value="5">KTAS 5</mat-option>
+                  <mat-option value="8">기타(분류불가)</mat-option>
+                  <mat-option value="9">미상</mat-option>
+                </mat-select>
+                <mat-error class="Select_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Section_Box KCD-9">
+        <div class="Section_Header">
+          <span class="Section_Title">
+            2 &#41; 응급실 내원일 기준 1년 이내 진단이력 - KCD-9 code 기준</span
+          >
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label" style="line-height: 14px"
+                >심혈관 질환 이력
+                <br />
+
+                <span style="font-size: 12px">
+                  KCD-9 <br />
+                  I0 ~ I5</span
+                >
+              </label>
+              <mat-radio-group
+                name="cardiohx"
+                [(ngModel)]="cardiohx_selected"
+                [formControl]="cardiohx"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="cardiohx.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label" style="line-height: 14px"
+                >암 질환 이력
+                <br />
+
+                <span style="font-size: 12px">
+                  KCD-9 <br />
+                  C0 ~ C8</span
+                >
+              </label>
+              <mat-radio-group
+                name="cancerhx"
+                [(ngModel)]="cancerhx_selected"
+                [formControl]="cancerhx"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="cancerhx.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label" style="line-height: 14px"
+                >신경계 질환 이력
+                <br />
+
+                <span style="font-size: 12px">
+                  KCD-9 <br />
+                  I63 ~ I69</span
+                >
+              </label>
+              <mat-radio-group
+                name="neurologyhx"
+                [(ngModel)]="neurologyhx_selected"
+                [formControl]="neurologyhx"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+
+                <mat-error class="Radio_Error" *ngIf="neurologyhx.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label" style="line-height: 14px"
+                >호흡기 질환 이력
+                <br />
+
+                <span style="font-size: 12px">
+                  KCD-9 <br />
+                  J42 ~ J66</span
+                >
+              </label>
+              <mat-radio-group
+                name="lunghx"
+                [(ngModel)]="lunghx_selected"
+                [formControl]="lunghx"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="lunghx.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Section_Box Vital_Sign">
+        <div class="Section_Header">
+          <span class="Section_Title">3 &#41; 활력 징후</span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">SBP</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="ini_SBP"
+
+
+                  [formControl]="ini_SBP"
+                  [(ngModel)]="iniSBP_case"
+                  placeholder="SBP"
+                  required
+                />
+                <label class="Label_Unit" for="">mmHg</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">DBP</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="ini_DBP"
+
+
+                  [formControl]="ini_DBP"
+                  [(ngModel)]="iniDBP_case"
+                  required
+                  placeholder="DBP"
+                />
+                <label class="Label_Unit" for="">mmHg</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">맥박</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="ini_PR"
+
+
+                  [formControl]="ini_PR"
+                  [(ngModel)]="iniPR_case"
+                  placeholder="초기 맥박"
+                  required
+                />
+                <label class="Label_Unit" for="">bpm</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">호흡수</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="ini_RR"
+                  [formControl]="ini_RR"
+                  [(ngModel)]="iniRR_case"
+                  placeholder="초기 호흡수"
+                  required
+                />
+                <label class="Label_Unit" for="">breaths/min</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">산소포화도</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="ini_spo2"
+                  [formControl]="ini_spo2"
+                  [(ngModel)]="inispo2_case"
+                  placeholder="초기 산호포화도"
+                  required
+                />
+                <label class="Label_Unit" for="">%</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">체온</label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  max="99"
+                  name="ini_BT"
+                  [formControl]="ini_BT"
+                  [(ngModel)]="iniBT_case"
+                  required
+                  placeholder="체온"
+                />
+                <label class="Label_Unit" for="">℃</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">의식 수준</label>
+              <mat-form-field>
+                <mat-select
+                  name="ini_mental"
+                  [formControl]="ini_mental"
+                  [(ngModel)]="inimental_selected"
+                  placeholder="의식 수준"
+                  required
+                >
+                  <mat-option value="1">A</mat-option>
+                  <mat-option value="2">V</mat-option>
+                  <mat-option value="3">P</mat-option>
+                  <mat-option value="4">U</mat-option>
+                  <mat-option value="5">미상</mat-option>
+                </mat-select>
+                <mat-error class="Select_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Section_Box Recent_Lab">
+        <div class="Section_Header">
+          <span class="Section_Title"> 4 &#41; 최근 1년 이내 진단이력 </span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">AST <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_AST"
+                  [formControl]="b_AST"
+                  [(ngModel)]="b_AST_case"
+                  placeholder="AST"
+                />
+                <label class="Label_Unit" for="">U/l</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Total Bilirubin <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_bil"
+                  [formControl]="b_bil"
+                  [(ngModel)]="b_bil_case"
+                  placeholder="Total Bilirubin"
+                />
+                <label class="Label_Unit" for="">mg/dl</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">CRP <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_CRP"
+                  [formControl]="b_CRP"
+                  [(ngModel)]="b_CRP_case"
+                  placeholder="CRP"
+                />
+                <label class="Label_Unit" for="">mg/dl</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Cr <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_Cr"
+                  [formControl]="b_Cr"
+                  [(ngModel)]="b_Cr_case"
+                  placeholder="Cr"
+                />
+                <label class="Label_Unit" for="">mg/dl</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Hb <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_Hb"
+                  [formControl]="b_Hb"
+                  [(ngModel)]="b_Hb_case"
+                  placeholder="Hb"
+                />
+                <label class="Label_Unit" for="">g/dl</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> lactic <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_lactic"
+                  [formControl]="b_lactic"
+                  [(ngModel)]="b_lactic_case"
+                  placeholder="lactic"
+                />
+                <label class="Label_Unit" for="">mmol/L</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> NT-proBNP <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_BNP"
+                  [formControl]="b_BNP"
+                  [(ngModel)]="b_BNP_case"
+                  placeholder="NT-proBNP"
+                />
+                <label class="Label_Unit" for="">pg/mL</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> PLT <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_PLT"
+                  [formControl]="b_PLT"
+                  [(ngModel)]="b_PLT_case"
+                  placeholder="PLT"
+                />
+                <label class="Label_Unit" for="">*10³/μL</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> WBC <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_WBC"
+                  [formControl]="b_WBC"
+                  [(ngModel)]="b_WBC_case"
+                  placeholder="WBC"
+                />
+                <label class="Label_Unit" for="">*10³/μL</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">
+                Na
+                <br />
+              </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_Na"
+                  [formControl]="b_Na"
+                  [(ngModel)]="b_Na_case"
+                  placeholder="Na"
+                />
+                <label class="Label_Unit" for="">mmol/L</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">
+                K
+                <br />
+              </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="b_K"
+                  [formControl]="b_K"
+                  [(ngModel)]="b_K_case"
+                  placeholder="K"
+                />
+                <label class="Label_Unit" for="">mmol/L</label>
+                <mat-error class="Text_Error">
+                  This section or upper one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Section_Box Initial_Lab">
+        <div class="Section_Header">
+          <span class="Section_Title">
+            <button mat-button (click)="Open_Additional_Section($event)">
+              추가 항목
+            </button>
+
+            &#41; 3시간 후 피검사 값
+            <span class="Mark_Point">*필요한 경우에 입력해 주세요.</span>
+          </span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">AST <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_AST"
+                  [formControl]="a_AST"
+                  [(ngModel)]="a_AST_case"
+                  placeholder="AST"
+                />
+                <label class="Label_Unit" for="">U/l</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Total Bilirubin <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_bil"
+                  [formControl]="a_bil"
+                  [(ngModel)]="a_bil_case"
+                  placeholder="Total Bilirubin"
+                />
+                <label class="Label_Unit" for="">mg/dl</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">CRP <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_CRP"
+                  [formControl]="a_CRP"
+                  [(ngModel)]="a_CRP_case"
+                  placeholder="CRP"
+                />
+                <label class="Label_Unit" for="">mg/dl</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Cr <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_Cr"
+                  [formControl]="a_Cr"
+                  [(ngModel)]="a_Cr_case"
+                  placeholder="Cr"
+                />
+                <label class="Label_Unit" for="">mg/dl</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Hb <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="a_Hb"
+
+
+                  [formControl]="a_Hb"
+                  [(ngModel)]="a_Hb_case"
+                  placeholder="Hb"
+                />
+                <label class="Label_Unit" for="">g/dl</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> lactic <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_lactic"
+                  [formControl]="a_lactic"
+                  [(ngModel)]="a_lactic_case"
+                  placeholder="lactic"
+                />
+                <label class="Label_Unit" for="">mmol/L</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> NT-proBNP <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_BNP"
+                  [formControl]="a_BNP"
+                  [(ngModel)]="a_BNP_case"
+                  placeholder="NT-proBNP"
+                />
+                <label class="Label_Unit" for="">pg/mL</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> PLT <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_PLT"
+                  [formControl]="a_PLT"
+                  [(ngModel)]="a_PLT_case"
+                  placeholder="PLT"
+                />
+
+                <label class="Label_Unit" for="">*10³/μL</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Procal <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_Procal"
+                  [formControl]="a_Procal"
+                  [(ngModel)]="a_Procal_case"
+                  placeholder="Procal"
+                />
+
+                <label class="Label_Unit" for="">ng/mL</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> TnT <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_TnT"
+                  [formControl]="a_TnT"
+                  [(ngModel)]="a_TnT_case"
+                  placeholder="TnT"
+                />
+                <label class="Label_Unit" for="">ng/mL</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> WBC <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_WBC"
+                  [formControl]="a_WBC"
+                  [(ngModel)]="a_WBC_case"
+                  placeholder="WBC"
+                />
+                <label class="Label_Unit" for="">*10³/μL</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">
+                Na
+                <br />
+              </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_Na"
+                  [formControl]="a_Na"
+                  [(ngModel)]="a_Na_case"
+                  placeholder="Na"
+                />
+                <label class="Label_Unit" for="">mmol/L</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> K </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+
+
+                  name="a_K"
+                  [formControl]="a_K"
+                  [(ngModel)]="a_K_case"
+                  placeholder="K"
+                />
+                <label class="Label_Unit" for="">mmol/L</label>
+                <mat-error class="Text_Error">
+                  This section or bellow one required !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="Section_Box Result" [action]="Request_Url" method="post">
+        <input
+          type="submit"
+          class="Result_Btn"
+          (click)="GetResult($event)"
+          value="결과보기"
+        />
+      </form>
+    </div>
+    <button class="Monitoring_Btn" (click)="Open_Monitoring()">
+      <span class="material-icons-outlined">
+        <span class="material-icons-outlined"> legend_toggle </span>
+      </span>
+      성능지표 보기
+    </button>
+
+    <button class="Survey_Btn" routerLink="/survey">
+      <span class="material-icons-outlined"> content_paste </span>
+      설문조사 참여
+    </button>
+  </div>
+</div>
+
+<mat-progress-spinner
+  color="primary"
+  mode="determinate"
+  [value]="loadingPercent"
+  strokeWidth="5"
+  diameter="50"
+>
+</mat-progress-spinner>

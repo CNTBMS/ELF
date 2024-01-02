@@ -1,0 +1,332 @@
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 100;
+  src: url(assets/Font/SUIT/SUIT-Thin.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 200;
+  src: url(assets/Font/SUIT/SUIT-ExtraLight.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 300;
+  src: url(assets/Font/SUIT/SUIT-Light.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/Font/SUIT/SUIT-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 500;
+  src: url(assets/Font/SUIT/SUIT-Medium.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 600;
+  src: url(assets/Font/SUIT/SUIT-SemiBold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 700;
+  src: url(assets/Font/SUIT/SUIT-Bold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 800;
+  src: url(assets/Font/SUIT/SUIT-ExtraBold.woff2) format("woff2");
+}
+@font-face {
+  font-family: "SUIT";
+  font-style: normal;
+  font-weight: 900;
+  src: url(assets/Font/SUIT/SUIT-Heavy.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Nanum Gothic Coding";
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/Font/Nanum_Gothic_Coding/NanumGothicCoding-Regular.ttf)
+    format("ttf");
+}
+@font-face {
+  font-family: "Nanum Gothic Coding";
+  font-style: normal;
+  font-weight: 700;
+  src: url(assets/Font/Nanum_Gothic_Coding/NanumGothicCoding-Bold.ttf)
+    format("ttf");
+}
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/Font/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url(assets/Font/iconfont/MaterialIcons-Regular.woff2) format("woff2"),
+    url(assets/Font/iconfont/MaterialIcons-Regular.woff) format("woff"),
+    url(assets/Font/iconfont/MaterialIcons-Regular.eot) format("eot"),
+    url(assets/Font/iconfont/MaterialIcons-Regular.ijmap) format("ijmap"),
+    url(assets/Font/iconfont/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* CUSTOM */
+html,
+body {
+  height: 100%;
+
+  min-width: 1000px;
+  overflow: hidden;
+  font-family: "SUIT", "Nanum Gothic Coding", sans-serif !important;
+  position: relative;
+}
+body {
+  margin: 0;
+
+  font-family: "SUIT", "Nanum Gothic Coding", sans-serif !important;
+}
+
+.mdc-text-field--outlined {
+  --mdc-outlined-text-field-outline-width: 0px !important;
+  --mdc-outlined-text-field-focus-outline-width: 0px !important;
+}
+
+.mdc-form-field > label {
+  color: #4d71a5;
+  font-weight: 500;
+}
+.App_Survey_Container .mdc-form-field > label {
+  color: #4d71a5;
+  font-weight: 500;
+  font-size: 0.9em;
+  padding-left: 0px !important;
+  letter-spacing: -2px;
+}
+
+.mat-mdc-radio-button .mdc-radio {
+  color: #4d71a5;
+}
+.mdc-linear-progress__bar-inner {
+  border-color: #517be9 !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  /* display: none !important; */
+  position: absolute !important;
+  z-index: 1;
+  transform: translateY(30px);
+}
+
+mat-form-field input::placeholder {
+  color: rgb(161, 161, 161) !important;
+}
+
+.mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined)
+  .mat-mdc-form-field-infix {
+  padding-top: 0 !important;
+}
+.SMC_Result_Dialog_Container .dialog-background {
+  background-color: rgba(113, 113, 113, 0.44);
+  backdrop-filter: blur(4px);
+}
+
+.Login_Form_Box .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+.App_SMC_Algo_Container .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white;
+}
+
+.App_SMC_Algo_Container
+  .mdc-text-field--filled:not(.mdc-text-field--disabled)
+  .mat-form-field-underline {
+  display: none !important;
+}
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  font-size: 1.1em !important;
+  line-height: 1.5em !important;
+  width: 400px !important;
+  max-width: inherit !important;
+  text-align: center !important;
+  padding: 16px;
+}
+
+.Login_Form_Box .mdc-text-field-underline {
+  background-color: red;
+  color: red;
+}
+.Login_Form_Box .mat-mdc-form-field-focus-overlay {
+  background-color: white;
+}
+
+.Login_Form_Box
+  .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label {
+  --mdc-filled-text-field-active-indicator-color: #4d71a5;
+  --mdc-filled-text-field-active-indicator-height: "1px";
+  height: 45px;
+
+  line-height: 45px;
+  color: #4d71a5;
+  font-weight: 600;
+}
+.Login_Form_Box .mdc-text-field {
+  padding: 0 !important;
+}
+
+/* indigo-pink.css control  */
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: inherit;
+}
+.mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+  background-color: transparent !important;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled:checked
+  + .mdc-radio__background
+  .mdc-radio__outer-circle {
+  border-color: #4d71a5 !important;
+}
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled
+  + .mdc-radio__background
+  .mdc-radio__inner-circle {
+  border-color: #4d71a5 !important;
+}
+.mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+  background-color: transparent !important;
+}
+.mdc-text-field--no-label:not(.mdc-text-field--textarea)
+  .mat-mdc-form-field-input-control.mdc-text-field__input,
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: auto;
+  color: #050f32;
+  font-weight: 500;
+  font-size: 0.9em;
+  font-family: "SUIT", "Nanum Gothic Coding", sans-serif !important;
+  /* border: 1px solid black; */
+
+  border-radius: 4px;
+}
+
+.App_Login_Container
+  .mdc-text-field--no-label:not(.mdc-text-field--textarea)
+  .mat-mdc-form-field-input-control.mdc-text-field__input,
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  border: 1px solid #aebde4 !important;
+  text-indent: 16px;
+  height: 48px;
+}
+
+.mat-mdc-form-field-error {
+  display: block;
+}
+.mat-mdc-form-field-error.Text_Error {
+  display: block !important;
+  transform: translateY(0px) !important;
+}
+.mat-mdc-form-field-error.Radio_Error {
+  font-size: 0.8em !important;
+  transform: translateY(-8px) !important;
+  position: absolute;
+}
+/* dialog  */
+
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  z-index: 1000;
+}
+.SMC_Result_Dialog_Container,
+.KUMC_Result_Dialog_Container,
+.Monitoring_Dialog_Container {
+  /* border: 1px solid red !important; */
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.SMC_Result_Dialog_Container {
+  border: 3px solid #aebde4;
+  box-shadow: 1px 1px 1px inset #a1a6b3;
+}
+.KUMC_Result_Dialog_Container {
+  border: 3px solid #aebde4;
+  box-shadow: 1px 1px 1px inset #a1a6b3;
+}
+.Monitoring_Dialog_Container {
+  border: 3px solid #aebde4;
+  box-shadow: 1px 1px 1px inset #a1a6b3;
+}
+.Survey_End_Dialog_Container {
+  border: 3px solid #aebde4;
+  box-shadow: 1px 1px 1px inset #a1a6b3;
+}
+.KUMC_Result_Dialog_Container mat-dialog-actions {
+  width: 100%;
+}
+.Monitoring_Dialog_Container mat-dialog-actions {
+  width: 100%;
+}
+.SMC_Result_Dialog_Container mat-dialog-actions {
+  width: 100%;
+}
+.Survey_End_Dialog_Container mat-dialog-actions {
+  width: 100%;
+}
+
+.Survey_End_Dialog_Container {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 300px;
+  background: white;
+  border-radius: 8px;
+}
+
+.cdk-overlay-backdrop {
+  background: #808080b5;
+}
+
+.mat-mdc-progress-spinner {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

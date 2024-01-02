@@ -1,0 +1,534 @@
+<div class="App_KUMC_Algo_Container">
+  <mat-toolbar class="KUMC_Algo_Header">
+    <div class="Valid_Area" style="min-width: 1000px">
+      <div class="ELF_Logo_Box" routerLink="/select">
+        <img src="../../assets/img/ELF-최종안-가로.png" alt="" />
+      </div>
+      <div class="Header_Information">
+        <span class="KUMC_Algo_Title"
+          >응급실 심혈관 시술 및 수술 예측 (KUMC)</span
+        >
+        <div class="Algo_Header_Btns">
+          <form action="http://192.168.2.8:8080/logout" routerLink="/">
+            <input type="submit" value="로그아웃" class="Logout_Btn" />
+          </form>
+          <button
+            mat-icon-button
+            class="Back_Btn"
+            aria-label="Example icon-button with heart icon"
+            (click)="backClicked()"
+          >
+            <span class="material-icons-outlined"> arrow_back </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="KUMC_Algo_Section">
+    <div class="Valid_Area">
+      <div class="Section_Box Information">
+        <div class="Section_Header">
+          <span class="Section_Title">1 &#41; 환자 정보 </span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Age <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="Age"
+                  [formControl]="age"
+                  required
+                  placeholder="Age"
+                  [(ngModel)]="age_default"
+                />
+                <label class="Label_Unit" for="">세</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Sex </label>
+              <mat-radio-group
+                name="sex"
+                [formControl]="sex"
+                [(ngModel)]="sex_selected"
+                required
+              >
+                <mat-radio-button class="" value="0">남자</mat-radio-button>
+                <mat-radio-button class="" value="1">여자</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="sex.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Pulse rate <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="pulse_rate"
+                  [formControl]="pulse_rate"
+                  required
+                  type="number"
+                  [(ngModel)]="pulserate_default"
+                  placeholder="Pulse rate"
+                />
+                <label class="Label_Unit" for="">beats/min</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">
+                Body temperature <br />
+              </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="body_temper"
+                  [formControl]="body_temper"
+                  required
+                  type="number"
+                  [(ngModel)]="BT_default"
+                  placeholder="Body temperature"
+                />
+                <label class="Label_Unit" for="">&#x2103;</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Section_Box Chief_Complaint">
+        <div class="Section_Header">
+          <span class="Section_Title">2 &#41; Chief Complaint </span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row"></div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Post-CPR state</label>
+              <mat-radio-group
+                name="postCPR"
+                [formControl]="postCPR"
+                required
+                [(ngModel)]="postCPR_selected"
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="postCPR.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Abdominal pain</label>
+              <mat-radio-group
+                name="abdomin_pain"
+                [formControl]="abdomin_pain"
+                [(ngModel)]="abdominpain_selected"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="abdomin_pain.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Dizziness</label>
+              <mat-radio-group
+                name="dizz"
+                [formControl]="dizz"
+                required
+                [(ngModel)]="dizz_selected"
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="dizz.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">Fever</label>
+              <mat-radio-group
+                name="fever"
+                [formControl]="fever"
+                required
+                [(ngModel)]="fever_selected"
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="fever.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <div class="Section_Item_Box">
+          <label class="Section_Item_Label">Chest pain</label>
+          <mat-radio-group
+            name="chest_pain"
+            [formControl]="chest_pain"
+            [(ngModel)]="chestpain_selected"
+            required
+          >
+            <mat-radio-button class="" value="1">있음</mat-radio-button>
+            <mat-radio-button class="" value="0">없음</mat-radio-button>
+            <mat-error class="Radio_Error" *ngIf="chest_pain.invalid">
+              Valid value is required!
+            </mat-error>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="Section_Box ECG">
+        <div class="Section_Header">
+          <span class="Section_Title">3 &#41; ECG test Results </span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> PR interval <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="PR_interval"
+                  [formControl]="PR_interval"
+                  [(ngModel)]="PRinterval_default"
+                  required
+                  placeholder="PR interval"
+                />
+                <label class="Label_Unit" for="">ms</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> QRS duration </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="QRS_duration"
+                  [formControl]="QRS_duration"
+                  required
+                  placeholder="QRS Duration"
+                  [(ngModel)]="QRSduration_default"
+                />
+                <label class="Label_Unit" for="">ms</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >Q wave/major <br />
+                ST-T change</label
+              >
+              <mat-radio-group
+                name="ST_T_change"
+                [formControl]="ST_T_change"
+                [(ngModel)]="STTchange_selected"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="ST_T_change.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label">ST elevation</label>
+              <mat-radio-group
+                name="ST"
+                [formControl]="ST"
+                required
+                [(ngModel)]="ST_selected"
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="ST.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >Left ventricular hypertrophy</label
+              >
+              <mat-radio-group
+                name="L_ventri_hyper"
+                [formControl]="L_ventri_hyper"
+                [(ngModel)]="LVentriHyper_selected"
+                required
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="L_ventri_hyper.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+            <div class="Section_Item_Box ECG_Section_Item">
+              <span
+                class="Mark_Point"
+                style="position: absolute; top: 0; left: 30px"
+                >◼</span
+              >
+              <label class="Section_Item_Label">Other ECG finding </label>
+              <mat-radio-group
+                name="ECG"
+                [formControl]="ECG"
+                required
+                [(ngModel)]="ecg_selected"
+              >
+                <mat-radio-button class="" value="1">있음</mat-radio-button>
+                <mat-radio-button class="" value="0">없음</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="ECG.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="Mark_Information">
+            <span class="Mark_Point">◼</span>
+            ▪ Normal sinus rhythm ▪ Q wave/major ST-T change ▪ ST elevation ▪
+            Minor ST-T change ▪ LVH ▪ Bundle branch block <br />
+            ▪ Comlete AV block ▪ Ventricular Tachycardia ▪ Tachycardia ▪
+            Bigeminy ▪ AF RVR 를 제외한 경우입니다
+          </div>
+        </div>
+      </div>
+
+      <div class="Section_Box Other">
+        <div class="Section_Header">
+          <span class="Section_Title">4 &#41; 검사실 소견 </span>
+          <button class="Section_Reset_Btn" (click)="Reset_Handler($event)">
+            입력값 초기화
+          </button>
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Troponin <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="troponin"
+                  [formControl]="troponin"
+                  required
+                  type="number"
+                  placeholder="Troponin"
+                  [(ngModel)]="troponin_default"
+                />
+                <label class="Label_Unit" for="">ng/mL</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> CK-MB <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="CK_MB"
+                  [formControl]="CK_MB"
+                  required
+                  type="number"
+                  placeholder="CK-MB"
+                  [(ngModel)]="CKMB_default"
+                />
+                <label class="Label_Unit" for="">ng/mL</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Creatinine <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="creatinine"
+                  [formControl]="creatinine"
+                  required
+                  type="number"
+                  placeholder="Creatinine"
+                  [(ngModel)]="Cr_default"
+                />
+                <label class="Label_Unit" for="">mg/dL</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> CPK<br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="CPK"
+                  [formControl]="CPK"
+                  required
+                  type="number"
+                  placeholder="CPK"
+                  [(ngModel)]="CPK_default"
+                />
+                <label class="Label_Unit" for="">IU/L</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Total bilirubin <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="total_bilitubin"
+                  [formControl]="total_bilitubin"
+                  required
+                  type="number"
+                  placeholder="Total bilitubin"
+                  [(ngModel)]="totalbrilirubin_default"
+                />
+                <label class="Label_Unit" for="">mg/dL</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> ALP<br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="ALP"
+                  [formControl]="ALP"
+                  required
+                  type="number"
+                  placeholder="ALP"
+                  [(ngModel)]="ALP_default"
+                />
+                <label class="Label_Unit" for="">IU/L</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Hemoglobin <br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="hemoglobin"
+                  [formControl]="hemoglobin"
+                  required
+                  type="number"
+                  placeholder="Hemoglobin"
+                  [(ngModel)]="hemoglobin_default"
+                />
+                <label class="Label_Unit" for="">g/dl</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"> Glucose<br /> </label>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <input
+                  matInput
+                  name="glucose"
+                  [formControl]="glucose"
+                  required
+                  type="number"
+                  placeholder="Glucose"
+                  [(ngModel)]="glucose_default"
+                />
+                <label class="Label_Unit" for="">mg/dL</label>
+                <mat-error class="Text_Error">
+                  Valid value is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form [action]="Request_Url" method="post" class="Section_Box Result">
+        <input
+          type="submit"
+          value="결과보기"
+          class="Result_Btn"
+          (click)="GetResult($event)"
+        />
+      </form>
+    </div>
+    <button class="Monitoring_Btn" (click)="Open_Monitoring()">
+      <span class="material-icons-outlined">
+        <span class="material-icons-outlined"> legend_toggle </span>
+      </span>
+      성능지표 보기
+    </button>
+    <button class="Survey_Btn" routerLink="/survey">
+      <span class="material-icons-outlined"> content_paste </span>
+      설문조사 참여
+    </button>
+  </div>
+</div>
+
+<mat-progress-spinner
+  color="primary"
+  mode="determinate"
+  [value]="loadingPercent"
+  strokeWidth="5"
+  diameter="50"
+>
+</mat-progress-spinner>
