@@ -12,7 +12,7 @@ It is development of a platform for Federated learning with emergency room progn
 To preserve the privacy of medical data distributed across multiple institutions, federated model learning is performed using model weights without data integration<br/>
 It is operated in a cloud environment (Google Cloud Platform, Google Cloud Storage, Big Query)
 
-
+---
 ---
 ## 2. Environment
 ### 2-1. Freamwork
