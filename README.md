@@ -8,13 +8,12 @@
 4. [Experiments](#4-experiments)
 ---
 ## 1. Introduction
-##
 It is development of a platform for Federated learning with emergency room prognosis prediction models<br/>
 To preserve the privacy of medical data distributed across multiple institutions, federated model learning is performed using model weights without data integration<br/>
 It is operated in a cloud environment (Google Cloud Platform, Google Cloud Storage, Big Query)
 
 
-----
+---
 ## 2. Environment
 ### 2-1. Freamwork
 * NodeJS v16.18.1
