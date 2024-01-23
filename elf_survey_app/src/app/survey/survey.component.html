@@ -1,0 +1,238 @@
+<div class="App_Survey_Container">
+  <mat-toolbar class="Survey_Header">
+    <div class="Valid_Area" style="min-width: 1000px">
+      <div class="ELF_Logo_Box" routerLink="/select">
+        <img src="../../assets/img/ELF-최종안-가로.png" alt="" />
+      </div>
+      <div class="Header_Information">
+        <span class="KUMC_Algo_Title">설문조사</span>
+        <div class="Algo_Header_Btns">
+          <form action="http://192.168.2.8:8080/logout" routerLink="/">
+            <input type="submit" value="로그아웃" class="Logout_Btn" />
+          </form>
+          <button
+            mat-icon-button
+            class="Back_Btn"
+            aria-label="Example icon-button with heart icon"
+            (click)="backClicked()"
+          >
+            <span class="material-icons-outlined"> arrow_back </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <div class="Survey_Section">
+    <div class="Valid_Area">
+      <div class="Section_Box">
+        <div class="Section_Header">
+          <span class="Section_Title">효용성 항목</span>
+          <div class="Arrange_Title">
+            <span>매우 그렇지 않다</span>
+            <span>매우 그렇다</span>
+          </div>
+          <!-- <button class="Section_Reset_Btn">입력값 초기화</button> -->
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >1. 알고리즘이 제시한 결괏값이 적절하다고 생각합니까?</label
+              >
+            </div>
+            <div class="Section_Item_Box">
+              <mat-radio-group
+                name="Q_1"
+                [formControl]="Q_1"
+                required
+                [(ngModel)]="Q1_selected"
+              >
+                <mat-radio-button class="" value="1">1</mat-radio-button>
+                <mat-radio-button class="" value="2">2</mat-radio-button>
+                <mat-radio-button class="" value="3">3</mat-radio-button>
+                <mat-radio-button class="" value="4">4</mat-radio-button>
+                <mat-radio-button class="" value="5">5</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="Q_1.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >2. 알고리즘의 사용으로 의료진의 의사 결정에 도움을 줄 것이라고
+                생각하십니까?</label
+              >
+            </div>
+            <div class="Section_Item_Box">
+              <mat-radio-group
+                name="Q_2"
+                [formControl]="Q_2"
+                required
+                [(ngModel)]="Q2_selected"
+              >
+                <mat-radio-button class="" value="1">1</mat-radio-button>
+                <mat-radio-button class="" value="2">2</mat-radio-button>
+                <mat-radio-button class="" value="3">3</mat-radio-button>
+                <mat-radio-button class="" value="4">4</mat-radio-button>
+                <mat-radio-button class="" value="5">5</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="Q_2.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >3. 알고리즘이 제시한 결괏값이 의료진의 의견과 상이하다면
+                <br />선택을 수용할 의향이 있습니까?</label
+              >
+            </div>
+            <div class="Section_Item_Box">
+              <mat-radio-group
+                name="Q_3"
+                [formControl]="Q_3"
+                required
+                [(ngModel)]="Q3_selected"
+              >
+                <mat-radio-button class="" value="1">1</mat-radio-button>
+                <mat-radio-button class="" value="2">2</mat-radio-button>
+                <mat-radio-button class="" value="3">3</mat-radio-button>
+                <mat-radio-button class="" value="4">4</mat-radio-button>
+                <mat-radio-button class="" value="5">5</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="Q_3.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Section_Box">
+        <div class="Section_Header">
+          <span class="Section_Title">사용성 항목</span>
+          <div class="Arrange_Title">
+            <span>매우 그렇지 않다</span>
+            <span>매우 그렇다</span>
+          </div>
+          <!-- <button class="Section_Reset_Btn">입력값 초기화</button> -->
+        </div>
+        <div class="Section_Content">
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >4. 알고리즘 사용이 편리한 것 같습니까?</label
+              >
+            </div>
+            <div class="Section_Item_Box">
+              <mat-radio-group
+                name="Q_4"
+                [formControl]="Q_4"
+                required
+                [(ngModel)]="Q4_selected"
+              >
+                <mat-radio-button class="" value="1">1</mat-radio-button>
+                <mat-radio-button class="" value="2">2</mat-radio-button>
+                <mat-radio-button class="" value="3">3</mat-radio-button>
+                <mat-radio-button class="" value="4">4</mat-radio-button>
+                <mat-radio-button class="" value="5">5</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="Q_4.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >5. 알고리즘 프로그램 동작 속도에 만족합니까?</label
+              >
+            </div>
+            <div class="Section_Item_Box">
+              <mat-radio-group
+                name="Q_5"
+                [formControl]="Q_5"
+                required
+                [(ngModel)]="Q5_selected"
+              >
+                <mat-radio-button class="" value="1">1</mat-radio-button>
+                <mat-radio-button class="" value="2">2</mat-radio-button>
+                <mat-radio-button class="" value="3">3</mat-radio-button>
+                <mat-radio-button class="" value="4">4</mat-radio-button>
+                <mat-radio-button class="" value="5">5</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="Q_5.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div class="Section_Row">
+            <div class="Section_Item_Box">
+              <label class="Section_Item_Label"
+                >6. 알고리즘을 병원에 도입할 용의가 있습니까? <br />
+                혹은 알고리즘이 병원에 도입된다면 사용할 용의가 있습니까?
+              </label>
+            </div>
+            <div class="Section_Item_Box">
+              <mat-radio-group
+                name="Q_6"
+                [formControl]="Q_6"
+                required
+                [(ngModel)]="Q6_selected"
+              >
+                <mat-radio-button class="" value="1">1</mat-radio-button>
+                <mat-radio-button class="" value="2">2</mat-radio-button>
+                <mat-radio-button class="" value="3">3</mat-radio-button>
+                <mat-radio-button class="" value="4">4</mat-radio-button>
+                <mat-radio-button class="" value="5">5</mat-radio-button>
+                <mat-error class="Radio_Error" *ngIf="Q_6.invalid">
+                  Valid value is required!
+                </mat-error>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="Section_Box Result">
+        <input
+          type="submit"
+          class="Result_Btn"
+          (click)="SurveySubmit($event)"
+          value="설문 제출하기"
+        />
+      </form>
+    </div>
+  </div>
+  <!--
+  <div class="Survey_Footer">
+    <div class="Valid_Area">
+      <div class="ELF_Logo_Box">
+        <img src="../../assets/img/ELF-가로 WHITE.png" alt="" />
+      </div>
+
+      <div class="Contact_Box">
+        <span>
+          (주)씨앤텍시스템즈 TEL.02-734-2889 EMAIL.
+
+
+        </span>
+      </div>
+    </div>
+  </div> -->
+</div>
+<mat-progress-spinner
+  color="primary"
+  mode="determinate"
+  [value]="loadingPercent"
+  strokeWidth="5"
+  diameter="50"
+>
+</mat-progress-spinner>
