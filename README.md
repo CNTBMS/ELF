@@ -14,7 +14,7 @@ To preserve the privacy of medical data distributed across multiple institutions
 It is operated in a cloud environment (Google Cloud Platform, Google Cloud Storage, Big Query)
 
 
----
+----
 ## 2. Environment
 ### 2-1. Freamwork
 * NodeJS v16.18.1
