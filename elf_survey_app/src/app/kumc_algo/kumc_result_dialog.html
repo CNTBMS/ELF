@@ -1,0 +1,98 @@
+<div class="Dialog_Container">
+  <mat-dialog-content mat-dialog-content class="Result_Content">
+    <div *ngIf="data.IsThisMonitoirng !== 'YES'" class="Result_Mark">
+      <img src="../../assets/icon/line-md_confirm-circle.svg" alt="" />
+    </div>
+    <div *ngIf="data.IsThisMonitoirng !== 'YES'" class="Selected_Result">
+      <strong>응급실 심혈관 시술 및 수술 예측 &nbsp;</strong>
+
+      실행 결과입니다.
+    </div>
+    <div *ngIf="data.IsThisMonitoirng === 'YES'" class="Selected_Result">
+      <strong>성능지표 (KUMC)</strong>
+    </div>
+    <div>
+      <div *ngIf="data.IsThisMonitoirng !== 'YES'" class="Result_Section">
+        <div class="Result_Predict" *ngIf="data.predict1 == '필요합니다'">
+          <strong>
+            관상동맥 재개통술(coronary artery revascularization) 이
+            <br />
+            필요할 수 있습니다.
+          </strong>
+          관상동맥 재개통술 (coronary artery revascularization) 등 이에 대한
+          정밀한 평가 및 검사를 추천드립니다.
+        </div>
+        <div
+          class="Result_Predict"
+          *ngIf="data.predict1 == '필요하지 않습니다'"
+        >
+          <strong>
+            관상동맥 재개통술(coronary artery revascularization) 이
+            <br />
+            필요할 가능성이 적습니다.
+          </strong>
+          이 알고리즘의
+          <span>정확도 (accuracy)는 90%이상으로</span> 추정됩니다만,
+          <br />
+          관상동맥 재개통술 (coronary artery revascularization)이 필요할
+          가능성을 배제할 수 없습니다.
+          <br />
+          임상적으로 심혈관 질환의 위험도가 높다면 이에 대한 정밀한 평가 및
+          검사가 필요합니다.
+        </div>
+      </div>
+      <div *ngIf="data.IsThisMonitoirng === 'YES'">
+
+        <table mat-table [dataSource]="dataSource">
+          <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">{{element.model}}</td>
+          </ng-container>
+
+          <!-- Accuracy Column -->
+          <ng-container matColumnDef="Accuracy">
+            <th mat-header-cell *matHeaderCellDef>Accuracy</th>
+            <td mat-cell *matCellDef="let element">{{element.Accuracy}}</td>
+          </ng-container>
+
+          <!-- Precision Column -->
+          <ng-container matColumnDef="Precision">
+            <th mat-header-cell *matHeaderCellDef>Precision</th>
+            <td mat-cell *matCellDef="let element">{{element.Precision}}</td>
+          </ng-container>
+
+          <!-- Recall Column -->
+          <ng-container matColumnDef="Recall">
+            <th mat-header-cell *matHeaderCellDef>Recall</th>
+            <td mat-cell *matCellDef="let element">{{element.Recall}}</td>
+          </ng-container>
+
+          <!-- AUPRC Column -->
+          <ng-container matColumnDef="AUPRC">
+            <th mat-header-cell *matHeaderCellDef>AUPRC</th>
+            <td mat-cell *matCellDef="let element">{{element.AUPRC}}</td>
+          </ng-container>
+          <!-- AUROC Column -->
+          <ng-container matColumnDef="AUROC">
+            <th mat-header-cell *matHeaderCellDef>AUROC</th>
+            <td mat-cell *matCellDef="let element">{{element.AUROC}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+    </div>
+    <mat-dialog-actions>
+      <button mat-button class="Close_Btn" (click)="Dialog_Close_Handler()">
+        확인
+      </button>
+      <!-- <button mat-button>Basic</button> -->
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>
